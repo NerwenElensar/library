@@ -1,5 +1,7 @@
 let myLibrary = [];
-let formPopUp = document.querySelector(".form-pop-up");
+
+// Querying Elements
+const formPopUp = document.querySelector(".form-pop-up");
 
 const addBookButton = document.getElementById("add-book-btn");
 const submitBookButton = document.getElementById("submit-book-btn");
@@ -53,13 +55,22 @@ function displayBooks() {
     title.textContent = `Title: ${book.title}`;
     pages.textContent = `Pages: ${book.pages}`;
     read.textContent = `Read: ${book.read}`;
+    const deleteBookCardButton = document.createElement("button");
+    deleteBookCardButton.classList.add("delete-btn");
+    deleteBookCardButton.textContent = "Delete book";
+    deleteBookCardButton.addEventListener("click", removeBookFromLibrary);
 
     let card = document.createElement("div");
     card.classList.add("card");
-    card.append(author, title, pages, read);
-
+    card.setAttribute("data-index-number", myLibrary.indexOf(book));
+    card.append(author, title, pages, read, deleteBookCardButton);
     sect.append(card);
   });
+}
+
+function removeBookFromLibrary(event) {
+  myLibrary.splice(event.path[1].dataset.indexNumber, 1);
+  displayBooks();
 }
 
 function removeAllDisplayedBooks(container) {
@@ -73,3 +84,4 @@ const hobbit = new Book("J.R.R Tolkien", "The Hobbit", 320, true);
 const sofie = new Book("Jostein Gaarder", "Sofie's Welt", 618, false);
 addBookToLibrary(hobbit);
 addBookToLibrary(sofie);
+displayBooks();
