@@ -1,0 +1,25 @@
+.card {
+    border: solid black 1px;
+    border-radius: 8px;
+    text-align: center;
+    width: 250px;
+}
+
+.card-container {
+    display: flex;
+    gap: 48px;
+}
+
+.form-pop-up {
+    border: 1px black solid;
+    box-shadow: 0px 10px 5px rgb(148, 145, 145) ;
+    padding: 24px;
+    width: 250px;
+    display: none;
+}
+
+.form-container{
+    display: grid;
+    grid-template-columns: 100px 100px;
+    gap: 8px;
+}
