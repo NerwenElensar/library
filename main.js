@@ -42,6 +42,8 @@ function addBookToLibrary(book) {
 }
 
 function displayBooks() {
+  const sect = document.querySelector("section");
+  removeAllDisplayedBooks(sect);
   myLibrary.forEach((book) => {
     let author = document.createElement("p");
     let title = document.createElement("p");
@@ -56,10 +58,14 @@ function displayBooks() {
     card.classList.add("card");
     card.append(author, title, pages, read);
 
-    const sect = document.querySelector("section");
     sect.append(card);
   });
-  myLibrary = [];
+}
+
+function removeAllDisplayedBooks(container) {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
 }
 
 // Just for testing purpose TODO: Remove after fully implemented
