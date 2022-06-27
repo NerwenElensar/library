@@ -39,33 +39,51 @@ function Book(author, title, pages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+  console.log(this);
+  this.read = this.read === false ? true : false;
+  console.log(this.read);
+};
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
 function displayBooks() {
   const sect = document.querySelector("section");
-  removeAllDisplayedBooks(sect);
+  removeAllDisplayedBooks(sect); //remove all Books so they don't show up twice when displaying them again
   myLibrary.forEach((book) => {
     let author = document.createElement("p");
     let title = document.createElement("p");
     let pages = document.createElement("p");
     let read = document.createElement("p");
-    author.textContent = `Author: ${book.author}`; // create dom element with text
+    author.textContent = `Author: ${book.author}`;
     title.textContent = `Title: ${book.title}`;
     pages.textContent = `Pages: ${book.pages}`;
     read.textContent = `Read: ${book.read}`;
-    const deleteBookCardButton = document.createElement("button");
-    deleteBookCardButton.classList.add("delete-btn");
-    deleteBookCardButton.textContent = "Delete book";
-    deleteBookCardButton.addEventListener("click", removeBookFromLibrary);
 
     let card = document.createElement("div");
     card.classList.add("card");
     card.setAttribute("data-index-number", myLibrary.indexOf(book));
-    card.append(author, title, pages, read, deleteBookCardButton);
+    card.append(author, title, pages, read, createToggleButton(book), createDeleteButton());
     sect.append(card);
   });
+}
+
+function createDeleteButton() {
+  const deleteBookCardButton = document.createElement("button");
+  deleteBookCardButton.classList.add("delete-btn");
+  deleteBookCardButton.textContent = "Delete book";
+  deleteBookCardButton.addEventListener("click", removeBookFromLibrary);
+  return deleteBookCardButton;
+}
+
+function createToggleButton(book) {
+  const toggleReadButton = document.createElement("button");
+  toggleReadButton.classList.add("toggle-btn");
+  toggleReadButton.textContent = "Change read status";
+  toggleReadButton.addEventListener("click", book.toggleRead.bind(book));
+  return toggleReadButton;
 }
 
 function removeBookFromLibrary(event) {
