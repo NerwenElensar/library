@@ -65,7 +65,7 @@ function displayBooks() {
     let card = document.createElement("div");
     card.classList.add("card");
     card.setAttribute("data-index-number", myLibrary.indexOf(book));
-    card.append(author, title, pages, read, createToggleButton(book), createDeleteButton());
+    card.append(createDeleteButton(), author, title, pages, read, createToggleButton(book));
     sect.append(card);
   });
 }
@@ -73,7 +73,7 @@ function displayBooks() {
 function createDeleteButton() {
   const deleteBookCardButton = document.createElement("button");
   deleteBookCardButton.classList.add("delete-btn");
-  deleteBookCardButton.textContent = "Delete book";
+  deleteBookCardButton.innerHTML = "<img src='cancel.png'>";
   deleteBookCardButton.addEventListener("click", removeBookFromLibrary);
   return deleteBookCardButton;
 }
