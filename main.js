@@ -7,6 +7,8 @@ const addBookButton = document.getElementById("add-book-btn");
 const submitBookButton = document.getElementById("submit-book-btn");
 const cancelBookButton = document.getElementById("cancel-book-btn");
 
+// Pop Up Form
+
 addBookButton.addEventListener("click", openForm);
 cancelBookButton.addEventListener("click", closeForm);
 submitBookButton.addEventListener("click", () => {
@@ -32,6 +34,8 @@ function readFormData() {
   return new Book(author, title, pages, read);
 }
 
+// Library logic
+
 function Book(author, title, pages, read) {
   this.author = author;
   this.title = title;
@@ -39,10 +43,14 @@ function Book(author, title, pages, read) {
   this.read = read;
 }
 
-Book.prototype.toggleRead = function () {
-  console.log(this);
-  this.read = this.read === false ? true : false;
-  console.log(this.read);
+Book.prototype.toggleRead = function (event) {
+  if (this.read === false) {
+    this.read = true;
+  } else {
+    this.read = false;
+  }
+  const index = event.path[1].dataset.indexNumber;
+  setReadMessage(index, this.read);
 };
 
 function addBookToLibrary(book) {
@@ -60,7 +68,8 @@ function displayBooks() {
     author.textContent = `Author: ${book.author}`;
     title.textContent = `Title: ${book.title}`;
     pages.textContent = `Pages: ${book.pages}`;
-    read.textContent = `Read: ${book.read}`;
+    const readStatus = checkReadStatus(book.read);
+    read.textContent = `Read: ${readStatus}`;
 
     let card = document.createElement("div");
     card.classList.add("card");
@@ -87,7 +96,7 @@ function createToggleButton(book) {
 }
 
 function removeBookFromLibrary(event) {
-  myLibrary.splice(event.path[1].dataset.indexNumber, 1);
+  myLibrary.splice(event.path[2].dataset.indexNumber, 1);
   displayBooks();
 }
 
@@ -97,7 +106,21 @@ function removeAllDisplayedBooks(container) {
   }
 }
 
-// Just for testing purpose TODO: Remove after fully implemented
+function setReadMessage(index, readStatus) {
+  const cards = document.querySelectorAll(".card");
+  const message = checkReadStatus(readStatus);
+  cards.forEach((card) => {
+    if (card.dataset.indexNumber === index) {
+      card.querySelector(":nth-child(5)").textContent = `Read: ${message}`;
+    }
+  });
+}
+
+function checkReadStatus(readStatus) {
+  return readStatus === false ? "No" : "Yes";
+}
+
+// Example entries
 const hobbit = new Book("J.R.R Tolkien", "The Hobbit", 320, true);
 const sofie = new Book("Jostein Gaarder", "Sofie's Welt", 618, false);
 addBookToLibrary(hobbit);

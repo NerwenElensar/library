@@ -9,28 +9,28 @@
     <title>Library</title>
   </head>
   <body>
+    <form class="form-pop-up" action="">
+      <div class="form-container">
+        <label for="author" required>Author:* </label>
+        <input type="text" placeholder="Author" name="author" id="author" required />
+        <label for="title" required>Title:* </label>
+        <input type="text" placeholder="Title" name="title" id="title" required />
+        <label for="pages" required>Pages:* </label>
+        <input type="text" placeholder="Pages" name="pages" id="pages" required />
+        <label for="read">Read?</label>
+        <input type="checkbox" name="read" id="read" />
+      </div>
+      <input type="submit" value="Add" id="submit-book-btn" />
+      <input type="button" value="Cancel" id="cancel-book-btn" />
+    </form>
     <header>
       <h1>Library 📚</h1>
     </header>
+    <button id="add-book-btn"><img src="plus.png" alt="A plus sign" /></button>
     <main>
-      <button id="add-book-btn">Add new book</button>
       <section class="card-container">
         <!-- insert cards here, if a book was added -->
       </section>
-      <form class="form-pop-up" action="">
-        <div class="form-container">
-          <label for="author" required>Author:* </label>
-          <input type="text" placeholder="Author" name="author" id="author" required />
-          <label for="title" required>Title:* </label>
-          <input type="text" placeholder="Title" name="title" id="title" required />
-          <label for="pages" required>Pages:* </label>
-          <input type="text" placeholder="Pages" name="pages" id="pages" required />
-          <label for="read">Read?</label>
-          <input type="checkbox" name="read" id="read" />
-        </div>
-        <input type="reset" value="Add" id="submit-book-btn" />
-        <input type="button" value="Cancel" id="cancel-book-btn" />
-      </form>
     </main>
   </body>
 </html>
