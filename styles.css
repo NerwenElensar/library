@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&display=swap');
+
 *{
     margin: 0;
     padding: 0;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    align-items: center;
+    gap: 48px;
 }
 
 p{
@@ -9,7 +18,28 @@ p{
 
 header{
     background-color: #11999E;
+    grid-column: 1/3;
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-size: 2rem;
+    font-family: 'Gentium Book Plus', serif;
 }
+
+#add-book-btn{
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    justify-self: center;
+    box-shadow: rgba(204, 204, 204, 0.35) 0px 5px 8px;
+}
+
+#add-book-btn:hover{
+    box-shadow: rgba(204, 204, 204, 0.35) inset 0px 5px 8px;
+}
+
 
 .card {
     border-radius: 8px;
@@ -39,6 +69,11 @@ header{
     padding: 24px;
     width: 250px;
     display: none;
+    position: fixed;
+    right: 50%;
+    top: 30%;
+    background-color: antiquewhite;
+    z-index: 1;
 }
 
 .form-container{
