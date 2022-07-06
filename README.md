@@ -7,5 +7,7 @@ It is possible to remove a book again. And to toggle the book as read/unread, af
 
 - Working with Objects in JS
 - Style the website using HTML/CSS
-- How to integrate a pop-up
+- How to integrate a modal with a form
+  - Learning about preventDefault(), to prevent refreshing the page
+  - Listening to a 'submit' event on a form
 - DOM manipulation with JS
