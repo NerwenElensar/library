@@ -11,8 +11,9 @@ const cancelBookButton = document.getElementById("cancel-book-btn");
 
 addBookButton.addEventListener("click", openForm);
 cancelBookButton.addEventListener("click", closeForm);
-submitBookButton.addEventListener("click", () => {
-  const book = readFormData();
+formPopUp.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const book = readFormData(e);
   addBookToLibrary(book);
   closeForm();
   displayBooks();
@@ -26,11 +27,13 @@ function closeForm() {
   formPopUp.style.display = "none";
 }
 
-function readFormData() {
-  const author = formPopUp.elements["author"].value;
-  const title = formPopUp.elements["title"].value;
-  const pages = formPopUp.elements["pages"].value;
-  const read = formPopUp.elements["read"].checked;
+function readFormData(e) {
+  const formData = e.target;
+
+  const author = formData.author.value;
+  const title = formData.title.value;
+  const pages = formData.pages.value;
+  const read = formData.checked;
   return new Book(author, title, pages, read);
 }
 
