@@ -33,28 +33,29 @@ function readFormData(e) {
   const author = formData.author.value;
   const title = formData.title.value;
   const pages = formData.pages.value;
-  const read = formData.checked;
+  const read = formData.read.checked;
   return new Book(author, title, pages, read);
 }
 
 // Library logic
-
-function Book(author, title, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
-}
-
-Book.prototype.toggleRead = function (event) {
-  if (this.read === false) {
-    this.read = true;
-  } else {
-    this.read = false;
+class Book {
+  constructor(author, title, pages, read) {
+    this.author = author;
+    this.pages = pages;
+    this.title = title;
+    this.read = read;
   }
-  const index = event.path[1].dataset.indexNumber;
-  setReadMessage(index, this.read);
-};
+
+  toggleRead(event) {
+    if (this.read === false) {
+      this.read = true;
+    } else {
+      this.read = false;
+    }
+    const index = event.path[1].dataset.indexNumber;
+    setReadMessage(index, this.read);
+  }
+}
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
